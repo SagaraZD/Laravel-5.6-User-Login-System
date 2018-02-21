@@ -55,3 +55,19 @@ Route::post('postUpdateUser', [
     'uses' => 'UserController@postUpdateUser',
     'as' => 'postUpdateUser'
 ]);
+
+
+
+Route::get('/vacancies', function () {
+    return view('vacancies');
+});
+
+Route::post('postAddNewVacancy', [
+    'uses' => 'VacancyController@addNew',
+    'as' => 'postAddNewVacancy'
+]);
+
+Route::get('getvacancies', [
+    'uses' => 'VacancyController@get',
+    'as' => 'getvacancies'
+]);
