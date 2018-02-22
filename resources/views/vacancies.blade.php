@@ -47,6 +47,17 @@
        <input type="hidden" name="_token" value="{{ csrf_token() }}">
     </form>
        
+<br/> <br/>
+
+    <table id="vacancy" class="table" border='1'>
+    <tr>
+        <th>Vacancy title</th>
+         <th>More info</th>
+    </tr>
+</table>
+      
+    </div>
+
 
     <script type="text/javascript">
 
@@ -77,16 +88,44 @@
             _token:token
           },
            success:function(data){
-              alert(data.success);
+              alert('Saved');
+              getVacancies();
            }
         });
 
   });
 
 function getVacancies(){
-      $.get("/getvacancies", function(data, status){
-        console.log(data);
 
+    jQuery.support.cors = true;
+
+    $.ajax(
+    {
+        type: "GET",
+        url:  '/getvacancies',
+        data: "{}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        cache: false,
+        success: function (data) {
+            
+        var trHTML = '';
+                
+        $.each(data, function (i, item) {
+
+            
+            trHTML += '<tr><td>' + data[i].vacancy_email + '</td><td>' + data[i].vacancy_referance + '</td></tr>';
+
+        });
+        
+        $('#vacancy').append(trHTML);
+        
+        },
+        
+        error: function (msg) {
+            
+            alert(msg.responseText);
+        }
     });
 
 }
@@ -96,6 +135,4 @@ $(document).ready(function(){
 });
 
 </script>
-      
-    </div>
 @endsection

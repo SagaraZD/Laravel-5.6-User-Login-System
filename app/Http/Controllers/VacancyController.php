@@ -36,9 +36,9 @@ class VacancyController extends Controller
 
    public function get(){
    		
-   		$vacancies =  Vacancies::all();
-   		return $vacancies->toJson();
-   		
+   		return $vacancies =  Vacancies::all();
+   	
+
    }
 
 }
